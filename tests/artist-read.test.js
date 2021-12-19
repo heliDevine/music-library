@@ -39,7 +39,7 @@ describe('read artist', () => {
   describe('/artist/:artistId', () => {
     describe('GET', () => {
       it('returns a single artist with the correct id', async () => {
-        const expected = artists[0];
+        const expected = artist[0];
         const res = await request(app).get(`/artist/${expected.id}`).send();
 
         expect(res.status).to.equal(200);

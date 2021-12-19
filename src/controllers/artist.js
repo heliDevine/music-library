@@ -61,7 +61,7 @@ exports.read = async (req, res) => {
 //   }
 //   db.close();
 // });
-
+///// why my solution doesn't work?? /////
 // exports.readId = async (req, res) => {
 //   const db = await getDb();
 //   let id = req.params.id;
@@ -75,7 +75,7 @@ exports.read = async (req, res) => {
 //   db.close();
 // };
 
-///// solution ///////
+///// solution from track ///////
 exports.readId = async (req, res) => {
   const db = await getDb();
   const { artistId } = req.params;
