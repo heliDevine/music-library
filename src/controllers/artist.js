@@ -30,11 +30,6 @@ exports.read = async (req, res) => {
   db.close();
 };
 
-///// Getting an artist by Id controller function/////
-
-// defining a new GET route which matches path /artist/:artistId. You'll then need to write a controller which uses db.query() to SELECT everything from the artist table WHERE the id matches req.params.artistId.
-
-// There is a gotcha in this challenge, db.query() will single results on an array. To pass the test you will need to remove it from the array before you send the data in the response
 // exports.readId = async (req, res) => {
 //   const db = await getDb();
 //   let id = req.params.id;
@@ -90,3 +85,19 @@ exports.readId = async (req, res) => {
 
   db.close();
 };
+
+//tried to combine my code with if else statement
+//but it didn't work and broke the whole thing!
+
+// exports.readId = async (req, res) => {
+//   const db = await getDb();
+//   let id = req.params.id;
+
+//   const [artist] = await db.query('SELECT * FROM Artist WHERE id = ? ');
+//   if (!artist) {
+//     res.sendStatus(404);
+//   } else {
+//     res.status(200).json(artist.id);
+//   }
+//   db.close();
+// };
