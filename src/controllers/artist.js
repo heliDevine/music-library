@@ -101,3 +101,36 @@ exports.readId = async (req, res) => {
 //   }
 //   db.close();
 // };
+
+// exports.updateArtist = async (req, res) => {
+//   const db = await getDb();
+//   const { artistId } = req.params.id;
+//   const data = req.body;
+
+//   try {
+//     const [[artist]] = await db.query('UPDATE Artist SET ? WHERE id = ?'[(data, artistId)]);
+
+//     res.status(200).json(artist);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+//   db.close();
+// };
+exports.updateArtist = async (req, res) => {
+  const db = await getDb();
+  const { artistId } = req.params.id;
+  const data = req.body;
+
+  try {
+    const [[artist]] = await db.query('UPDATE Artist SET ? WHERE id = ?'[(data, artistId)]);
+
+    if (!artist) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).json(artist);
+    }
+  } catch (err) {
+    res.sendStatus(500);
+  }
+  db.close();
+};
