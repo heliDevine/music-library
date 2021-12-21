@@ -5,3 +5,5 @@ router.post('/', artistController.create);
 router.get('/', artistController.read);
 
 module.exports = router;
+
+/// i'm not sure how to connet user route///

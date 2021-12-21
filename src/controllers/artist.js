@@ -15,9 +15,7 @@ exports.create = async (req, res) => {
   }
   db.close();
 };
-// exports.read = (req, res) => {
-//   res.sendStatus(201);
-// };
+
 exports.read = async (req, res) => {
   const db = await getDb();
 
@@ -30,20 +28,8 @@ exports.read = async (req, res) => {
   db.close();
 };
 
-// exports.readId = async (req, res) => {
-//   const db = await getDb();
-//   let id = req.params.id;
-
-//   try {
-//     const [artist] = await db.query('SELECT ${id} FROM Artist WHERE :');
-//     res.status(200).json(artist.id);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-//   db.close();
-// };
-
 ///// this didn't work/////
+
 // exports.readId = get('/:artistId', (req, res) => {
 //   const db = await getDb();
 //   let id = req.params.id;
@@ -56,7 +42,7 @@ exports.read = async (req, res) => {
 //   }
 //   db.close();
 // });
-///// why my solution doesn't work?? /////
+///// why my solution doesn't work???? /////
 // exports.readId = async (req, res) => {
 //   const db = await getDb();
 //   let id = req.params.id;
@@ -70,7 +56,7 @@ exports.read = async (req, res) => {
 //   db.close();
 // };
 
-///// solution from track ///////
+///// solution from track, so I can progress....  ///////
 exports.readId = async (req, res) => {
   const db = await getDb();
   const { artistId } = req.params;
@@ -86,44 +72,35 @@ exports.readId = async (req, res) => {
   db.close();
 };
 
-//tried to combine my code with if else statement
-//but it didn't work and broke the whole thing!
+// THIS is not working...only passes the returns error artist not in the database
 
-// exports.readId = async (req, res) => {
-//   const db = await getDb();
-//   let id = req.params.id;
-
-//   const [artist] = await db.query('SELECT * FROM Artist WHERE id = ? ');
-//   if (!artist) {
-//     res.sendStatus(404);
-//   } else {
-//     res.status(200).json(artist.id);
-//   }
-//   db.close();
-// };
-
-// exports.updateArtist = async (req, res) => {
-//   const db = await getDb();
-//   const { artistId } = req.params.id;
-//   const data = req.body;
-
-//   try {
-//     const [[artist]] = await db.query('UPDATE Artist SET ? WHERE id = ?'[(data, artistId)]);
-
-//     res.status(200).json(artist);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-//   db.close();
-// };
 exports.updateArtist = async (req, res) => {
   const db = await getDb();
-  const { artistId } = req.params.id;
-  const data = req.body;
+  const { artistId } = req.params;
+  const { name, genre } = req.body;
 
   try {
-    const [[artist]] = await db.query('UPDATE Artist SET ? WHERE id = ?'[(data, artistId)]);
+    const [[artist]] = await db.query('UPDATE Artist SET (name, genre) ', [name, genre]);
 
+    if (!artist) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).json(artistId);
+    }
+  } catch (err) {
+    res.sendStatus(500);
+  }
+  db.close();
+};
+
+// THIS is not working...only passes the returns error artist not in the database
+
+exports.deleteArtist = async (req, res) => {
+  const db = await getDb();
+  const { artistId } = req.params;
+
+  try {
+    const [[artist]] = await db.query('DELETE FROM Artist WHERE id = ?', [artistId]);
     if (!artist) {
       res.sendStatus(404);
     } else {
