@@ -72,19 +72,20 @@ exports.readId = async (req, res) => {
   db.close();
 };
 
-// THIS is not working...only passes the returns error artist not in the database
+// THIS is not working...only passes the returns error TEST but artist not in the database
 
 exports.updateArtist = async (req, res) => {
   const db = await getDb();
   const { artistId } = req.params;
-  const { name, genre } = req.body;
+  const { data } = req.body;
 
   try {
-    const [[artist]] = await db.query('UPDATE Artist SET (name, genre) ', [name, genre]);
+    const [[artist]] = await db.query('SELECT * FROM Artist WHERE id = ?', [artistId]);
 
     if (!artist) {
       res.sendStatus(404);
     } else {
+      await db.query('UPDATE Artist SET ? WHERE id = ?', [data, artistId]);
       res.status(200).json(artistId);
     }
   } catch (err) {
@@ -100,11 +101,13 @@ exports.deleteArtist = async (req, res) => {
   const { artistId } = req.params;
 
   try {
-    const [[artist]] = await db.query('DELETE FROM Artist WHERE id = ?', [artistId]);
+    const [[artist]] = await db.query('SELECT * FROM Artist WHERE id = ?', [artistId]);
+
     if (!artist) {
       res.sendStatus(404);
     } else {
-      res.status(200).json(artist);
+      await db.query('DELETE FROM Artist WHERE id = ?', [artistId]);
+      res.status(200).json(artistId);
     }
   } catch (err) {
     res.sendStatus(500);
