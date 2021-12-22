@@ -72,29 +72,30 @@ exports.readId = async (req, res) => {
   db.close();
 };
 
-// THIS is not working...only passes the returns error TEST but artist not in the database
+// / THIS IS WORKING NOW!!! 🥳
 
 exports.updateArtist = async (req, res) => {
   const db = await getDb();
-  const { artistId } = req.params;
-  const { data } = req.body;
+  const artistId = req.params.artistId;
+  const data = req.body;
 
   try {
     const [[artist]] = await db.query('SELECT * FROM Artist WHERE id = ?', [artistId]);
+    // console.log(artistId + '****');
+    // console.log(data + '**');
 
     if (!artist) {
       res.sendStatus(404);
     } else {
       await db.query('UPDATE Artist SET ? WHERE id = ?', [data, artistId]);
       res.status(200).json(artistId);
+      // console.log(data + '**');
     }
   } catch (err) {
-    res.sendStatus(500);
+    res.status(500).send('error here');
   }
   db.close();
 };
-
-// THIS is not working...only passes the returns error artist not in the database
 
 exports.deleteArtist = async (req, res) => {
   const db = await getDb();
