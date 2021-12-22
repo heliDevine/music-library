@@ -6,5 +6,5 @@ router.post('/', artistController.create);
 router.get('/', artistController.read);
 router.get('/:artistId', artistController.readId);
 router.patch('/:artistId', artistController.updateArtist);
-router.get('/', artistController.deleteArtist);
+router.delete('/:artistId', artistController.deleteArtist);
 module.exports = router;

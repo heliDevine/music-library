@@ -97,21 +97,25 @@ exports.updateArtist = async (req, res) => {
   db.close();
 };
 
+// / ALSO Delete artist IS WORKING NOW!!! 🥳🥳
 exports.deleteArtist = async (req, res) => {
   const db = await getDb();
-  const { artistId } = req.params;
+  const artistId = req.params.artistId;
+  const data = req.body;
 
   try {
     const [[artist]] = await db.query('SELECT * FROM Artist WHERE id = ?', [artistId]);
+    console.log(artistId + '****');
 
     if (!artist) {
       res.sendStatus(404);
     } else {
       await db.query('DELETE FROM Artist WHERE id = ?', [artistId]);
       res.status(200).json(artistId);
+      console.log(data + '**%%%%');
     }
   } catch (err) {
-    res.sendStatus(500);
+    res.status(500).send('error here in delete function');
   }
   db.close();
 };
