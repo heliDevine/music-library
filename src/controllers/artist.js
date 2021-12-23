@@ -9,7 +9,8 @@ exports.create = async (req, res) => {
   try {
     await db.query(`INSERT INTO Artist (name, genre) VALUES (?, ?)`, [name, genre]);
 
-    res.sendStatus(201);
+    res.status(201).send('You have added a new artist to your library 🎶');
+    // res.sendStatus(201);
   } catch (err) {
     res.sendStatus(500).json(err);
   }
@@ -42,6 +43,7 @@ exports.read = async (req, res) => {
 //   }
 //   db.close();
 // });
+
 ///// why my solution doesn't work???? /////
 // exports.readId = async (req, res) => {
 //   const db = await getDb();
@@ -81,15 +83,12 @@ exports.updateArtist = async (req, res) => {
 
   try {
     const [[artist]] = await db.query('SELECT * FROM Artist WHERE id = ?', [artistId]);
-    // console.log(artistId + '****');
-    // console.log(data + '**');
 
     if (!artist) {
       res.sendStatus(404);
     } else {
       await db.query('UPDATE Artist SET ? WHERE id = ?', [data, artistId]);
       res.status(200).json(artistId);
-      // console.log(data + '**');
     }
   } catch (err) {
     res.status(500).send('error here');
@@ -105,17 +104,18 @@ exports.deleteArtist = async (req, res) => {
 
   try {
     const [[artist]] = await db.query('SELECT * FROM Artist WHERE id = ?', [artistId]);
-    console.log(artistId + '****');
 
     if (!artist) {
       res.sendStatus(404);
     } else {
       await db.query('DELETE FROM Artist WHERE id = ?', [artistId]);
-      res.status(200).json(artistId);
-      console.log(data + '**%%%%');
+      res
+        .status(200)
+        .send('Are you sure? Deleting your favourite artist? 😱 we are all allowed to have guilty pleasures 😄');
+      // res.status(200).json(artistId);
     }
   } catch (err) {
-    res.status(500).send('error here in delete function');
+    res.status(500).send('error here in delete function 🛑');
   }
   db.close();
 };

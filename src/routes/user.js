@@ -6,4 +6,4 @@ router.get('/', artistController.read);
 
 module.exports = router;
 
-/// i'm not sure how to connet user route///
+/// i'm not sure how to connect user route?? What is it meant to do ///

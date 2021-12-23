@@ -1,4 +1,4 @@
-# Music Library
+# Music Library 🎶
 
 **First project with [Manchester Codes](https://www.manchestercodes.com/) BACKEND module**
 
@@ -70,9 +70,13 @@ npm i -D mocha chai supertest
 
 **Project status**
 
-On 20th December 2021 the project is not fully finished and the UPDATE and DELETE operations are not working yet. My plan is to complete these in near future. This being the first backend API app managing the database the project was challenging at the times but very rewarding to see the CREATE and READ features working and to be able to add data.
+On 22rd December 2021 managed to make UPDATE and DELETE functions work.
 
-I'm also planning to add another route and extend the app to include album table.
+Possible ways to continue this project:
+
+-add another route "user"
+-extend the app to include album table.
+-connect artist id to album
 
 I have left some commented out code which is not working just as a notes for myself.
 
