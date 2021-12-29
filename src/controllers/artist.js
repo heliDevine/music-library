@@ -1,5 +1,5 @@
 // const { restart } = require('nodemon');
-const { get } = require('../routes/artist');
+// const { get } = require('../routes/artist');
 const getDb = require('../services/db');
 
 exports.create = async (req, res) => {
