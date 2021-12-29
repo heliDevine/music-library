@@ -1,4 +1,4 @@
-const { restart } = require('nodemon');
+// const { restart } = require('nodemon');
 const { get } = require('../routes/artist');
 const getDb = require('../services/db');
 
