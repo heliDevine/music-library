@@ -7,11 +7,13 @@ const args = process.argv.slice(2)[0];
 // use args to determine if .env or .env.test should be loaded
 const envFile = args === 'test' ? '../.env.test' : '../.env';
 // load environment variables from env files
-require('dotenv').config({
-  path: path.join(__dirname, envFile)
-});
+if (args === 'test') {
+  require('dotenv').config({
+    path: path.join(__dirname, envFile)
+  });
+}
 // destructure environment variables from process.env
-const { DB_PASSWORD, DB_NAME, DB_USER, DB_HOST, DB_PORT } = process.env;
+const { DB_PASSWORD, DB_NAME, DB_USER, DB_HOST, DB_PORT, CLEARDB_DATABASE_URL } = process.env;
 // This asyncronous function will run before app
 const setUpDatabase = async () => {
   try {
@@ -22,6 +24,7 @@ const setUpDatabase = async () => {
       password: DB_PASSWORD,
       port: DB_PORT
     });
+
     // create the database if it doesn't already exist
     await db.query(`CREATE DATABASE IF NOT EXISTS ${DB_NAME}`);
     await db.query(`USE ${DB_NAME}`);
