@@ -1,8 +1,8 @@
 /// before deploying with heroku///
 
-// const mysql = require('mysql2/promise');
+const mysql = require('mysql2/promise');
 
-// const { DB_PASSWORD, DB_USER, DB_NAME, DB_HOST, DB_PORT } = process.env;
+const { DB_PASSWORD, DB_USER, DB_NAME, DB_HOST, DB_PORT, CLEARDB_DATABASE_URL } = process.env;
 
 // module.exports = async () => {
 //   const connection = await mysql.createConnection({
