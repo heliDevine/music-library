@@ -74,9 +74,9 @@ On 22rd December 2021 managed to make UPDATE and DELETE functions work.
 
 Possible ways to continue this project:
 
--add another route "user"
--extend the app to include album table.
--connect artist id to album
+- extend the app to include album table.
+
+- connect artist id to album
 
 I have left some commented out code which is not working just as a notes for myself.
 

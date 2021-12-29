@@ -1,9 +1,9 @@
-const express = require('express');
-const artistController = require('../controllers/artist');
-const router = express.Router();
-router.post('/', artistController.create);
-router.get('/', artistController.read);
+// const express = require('express');
+// const artistController = require('../controllers/artist');
+// const router = express.Router();
+// router.post('/', artistController.create);
+// router.get('/', artistController.read);
 
-module.exports = router;
+// module.exports = router;
 
-/// i'm not sure how to connect user route?? What is it meant to do ///
+// /// this file is not needed now ///
