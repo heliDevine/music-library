@@ -70,7 +70,7 @@ npm i -D mocha chai supertest
 
 **Project status**
 
-On 22rd December 2021 managed to make UPDATE and DELETE functions work.
+Completed and deployed with Heroku [here](https://music-library-helid.herokuapp.com/artist). Use Postman as a client to insert an artist to the database.
 
 Possible ways to continue this project:
 
