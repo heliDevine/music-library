@@ -1,0 +1,199 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Music-library",
+    "description": "An web app to CRUD artists in the database.",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "basePath": "/",
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "schemes": ["http", "https"],
+  "tags": [
+    {
+      "name": "Artists",
+      "description": "Endpoints for interacting with artists in the database"
+    }
+  ],
+  "paths": {
+    "/artist": {
+      "post": {
+        "tags": ["Artist"],
+        "summary": "creates a new aritst in the database",
+        "parameters": [
+          {
+            "name": "PostAritistRequest",
+            "in": "body",
+            "description": "post an artist to the database",
+            "schema": {
+              "type": "object",
+              "required": ["name", "genre"],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "genre": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "You have added a new artist to your library 🎶",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ArtistObject"
+            }
+          }
+        },
+        "produces": ["application/json"]
+      },
+      "get": {
+        "summary": "reads aritst from the database",
+        "tags": ["Artist"],
+        "parameters": [
+          {
+            "name": "name",
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "name": "genre",
+            "type": "string",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns array of artists",
+            "schema": {
+              "$ref": "#/definitions/ArtistObjects"
+            }
+          }
+        }
+      }
+    },
+    "/artist/{artistId}": {
+      "get": {
+        "summary": "read a single artist from the database",
+        "tags": ["Artist"],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "number",
+            "name": "artistId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns requested artist from database",
+            "schema": {
+              "$ref": "#/definitions/ArtistObject"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "update an artist in the database",
+        "tags": ["Artist"],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "number",
+            "name": "artistId",
+            "required": true
+          },
+          {
+            "name": "PatchArtistRequest",
+            "in": "body",
+            "description": "update an artist in the database",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "genre": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "updated artist",
+            "schema": {
+              "type": "object",
+              "required": ["artistUpdated"],
+              "properties": {
+                "artistUpdated": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete an artist in the database",
+        "tags": ["Artist"],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "number",
+            "name": "artistId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Are you sure? Deleting your favourite artist? we are all allowed to have guilty pleasures ",
+            "schema": {
+              "type": "object",
+              "required": ["artistDeleted"],
+              "properties": {
+                "artistDeleted": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "ArtistObjects": {
+        "properties": {
+          "artists": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ArtistObject"
+            }
+          }
+        }
+      },
+      "ArtistObject": {
+        "required": ["id", "name", "genre"],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "genre": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
