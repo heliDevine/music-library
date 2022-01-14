@@ -15,14 +15,3 @@ module.exports = async () => {
 
   return connection;
 };
-// await db.query(`CREATE DATABASE IF NOT EXISTS ${DB_NAME}`);
-// db.close();
-// create the database if it doesn't already exist
-// !CLEARDB_DATABASE_URL && (await db.query(`CREATE DATABASE IF NOT EXISTS ${DB_NAME}`));
-// !CLEARDB_DATABASE_URL && (await db.query(`USE ${DB_NAME}`));
-// await db.query(`CREATE TABLE IF NOT EXISTS Artist (
-//               id INT PRIMARY KEY auto_increment,
-//               name VARCHAR(25),
-//               genre VARCHAR(25)
-//              )`);
-// db.close();

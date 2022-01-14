@@ -8,7 +8,7 @@ The project followed TDD principles by writing a failing test and write the code
 
 ---
 
-**Consepts**
+**Concepts**
 
 - Database Design
 - SQL
@@ -17,7 +17,7 @@ The project followed TDD principles by writing a failing test and write the code
 
 ---
 
-**Programming langages and technologies used**
+**Programming languages and technologies used**
 
 - Express, NodeJS
 - MySQL
@@ -30,7 +30,7 @@ The project followed TDD principles by writing a failing test and write the code
 
 **Set up**
 
-To be able to run this application follwing environment needs to be installed:
+To be able to run this application following environment needs to be installed:
 
 [Docker](https://docs.docker.com/get-docker/)
 
@@ -38,35 +38,41 @@ To be able to run this application follwing environment needs to be installed:
 
 [Postman](https://www.postman.com/)
 
-```
-npm init -y
-```
+-clone this repo and set up local .env settings for:
+
+DB_PASSWORD=password
+
+DB_NAME=music_library_dev
+
+DB_USER=root
+
+DB_HOST=localhost
+
+DB_PORT=3307
+
+PORT=3000
+
+-change password to something more secure
+
+-set up the database connection, pull docker image and use MySQLWorkbench to manage the database.
 
 ```
-npx eslint --init
+docker run -d -p 3307:3306 --name music_library_mysql -e MYSQL_ROOT_PASSWORD=password mysql
 ```
 
-```
-npm i -S express
-```
+run:
 
 ```
-npm i -D nodemon
+npm i
 ```
 
-```
-npm i -D dotenv
-```
+**Routes**
 
-```
-npm i -S mysql2
-```
-
-```
-npm i -D mocha chai supertest
-```
-
----
+- Create: POST to /artist
+- Read all: GET to /artist
+- Read single artist: GET to /artist/:id
+- Update: PATCH to /artist/id
+- Delete: DELETE to /artist/:id
 
 **Project status**
 
@@ -78,10 +84,10 @@ Possible ways to continue this project:
 
 - connect artist id to album
 
-I have left some commented out code which is not working just as a notes for myself.
+- fix swagger front end
 
 ---
 
 **Comments**
 
-The project has streghten my knowledge of the complex _BACKEND_ development, _ODD (Object oriented programming)_ by keeping ROUTES, CONTROLLERS and SERVICES separate and of course again highlighed the importance of the testing environment.
+The project has streghten my knowledge of the complex Backend development, ODD (Object oriented programming) by keeping ROUTES, CONTROLLERS and SERVICES separate and of course again highlighed the importance of the testing environment.
